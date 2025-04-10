@@ -45,6 +45,12 @@
       <key>NSAllowsLocalNetworking</key>
       <true/>
     </dict>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Allow $(PRODUCT_NAME) to use your location.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Hiker needs access to your location to show your position on the map, even when the app is in the background.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Hiker needs access to your location to show your position on the map and provide navigation guidance.</string>
     <key>NSUserActivityTypes</key>
     <array>
       <string>$(PRODUCT_BUNDLE_IDENTIFIER).expo.index_route</string>

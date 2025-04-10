@@ -2,7 +2,6 @@ import React, { useRef, useState, useCallback, useEffect } from "react";
 import {
   StyleSheet,
   View,
-  Button,
   ActivityIndicator,
   Alert,
   Platform,
@@ -238,22 +237,28 @@ export default function HomeScreen() {
         />
       </TouchableOpacity>
 
-      <View style={styles.downloadContainer}>
+      <TouchableOpacity
+        style={[
+          styles.downloadButton,
+          isDownloading && styles.downloadingButton,
+        ]}
+        onPress={handleDownload}
+        disabled={isDownloading || !offlineManager}
+      >
         {isDownloading ? (
-          <View style={styles.progressContainer}>
-            <ActivityIndicator size="large" color="#007AFF" />
-            <Text style={styles.progressText}>
-              Downloading... ({Math.round(downloadProgress * 100)}%)
-            </Text>
-          </View>
+          <ActivityIndicator size="small" color="#ffffff" />
         ) : (
-          <Button
-            title="Download Visible Region"
-            onPress={handleDownload}
-            disabled={isDownloading || !offlineManager}
-          />
+          <Ionicons name="download" size={24} color="#0366d6" />
         )}
-      </View>
+      </TouchableOpacity>
+
+      {isDownloading && (
+        <View style={styles.progressIndicator}>
+          <Text style={styles.progressText}>
+            {Math.round(downloadProgress * 100)}%
+          </Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -267,28 +272,23 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
   },
-  downloadContainer: {
+  progressIndicator: {
     position: "absolute",
-    bottom: 30,
-    left: 20,
+    bottom: 95,
     right: 20,
     backgroundColor: "rgba(255, 255, 255, 0.8)",
-    padding: 15,
-    borderRadius: 8,
-    alignItems: "center",
-    marginBottom: 40,
-  },
-  progressContainer: {
-    alignItems: "center",
-    justifyContent: "center",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 15,
   },
   progressText: {
-    marginTop: 10,
-    fontSize: 16,
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#0366d6",
   },
   locationButton: {
     position: "absolute",
-    bottom: 90,
+    bottom: 160,
     right: 20,
     backgroundColor: "white",
     borderRadius: 30,
@@ -304,5 +304,24 @@ const styles = StyleSheet.create({
   },
   locationButtonDisabled: {
     backgroundColor: "#f0f0f0",
+  },
+  downloadButton: {
+    position: "absolute",
+    bottom: 95,
+    right: 20,
+    backgroundColor: "white",
+    borderRadius: 30,
+    width: 50,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  downloadingButton: {
+    backgroundColor: "#0366d6",
   },
 });
