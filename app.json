@@ -9,7 +9,13 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.hiker",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Hiker needs access to your location to show your position on the map and provide navigation guidance.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Hiker needs access to your location to show your position on the map, even when the app is in the background.",
+        "NSLocationAlwaysUsageDescription": "Hiker needs access to your location to show your position on the map, even when the app is in the background."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -24,6 +30,7 @@
     },
     "plugins": [
       "expo-router",
+      "@maplibre/maplibre-react-native",
       [
         "expo-splash-screen",
         {
@@ -31,6 +38,12 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
         }
       ]
     ],
